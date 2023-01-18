@@ -6,6 +6,7 @@ import BackForwardButtons from "./BackForwardButtons";
 import CardTitle from "./CardTitle";
 import Navbar from "./Navbar";
 import PlanForm from "./PersonalInfoForm";
+import SelectPlanForm from "./SelectPlanForm";
 
 const Container = styled.div`
   background-color: white;
@@ -30,7 +31,7 @@ const Form = styled.section`
 
 
 export default function Card() {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const [personalInfo, setPeronalInfo]: [
     PersonalInfo,
@@ -67,7 +68,9 @@ export default function Card() {
             title={formText[currentStep].title}
             subtitle={formText[currentStep].subtitle}
           />
-          {currentStep === 0 && <PlanForm/>}
+          {currentStep === 0 
+            ? <PlanForm/>
+            : <SelectPlanForm/>}
           <BackForwardButtons/>
         </Form>
       </CardRight>
