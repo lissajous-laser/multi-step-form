@@ -6,38 +6,32 @@ import proIcon from '../assets/images/icon-pro.svg';
 import MonthlyYearlyButton from "./MonthlyYearlyButton";
 
 
-const PlanButtons = styled.div`
+const Buttons = styled.div`
   display: flex;
   gap: 18px;
   margin-top: 40px;
 `
 
-
-
-const ArcadeButton = styled(PlanKindButton)`
-
-`;
-
 export default function SelectPlanForm() {
   return (
     <>
-      <PlanButtons>
-        <ArcadeButton
+      <Buttons>
+        <PlanKindButton
           iconSrc={arcadeIcon}
           planName='Arcade'
           price='$9/mo'  
         />
-        <ArcadeButton
+        <PlanKindButton
           iconSrc={advancedIcon}
           planName='Advanced'
           price='$12/mo'  
         />
-        <ArcadeButton
+        <PlanKindButton
           iconSrc={proIcon}
           planName='Pro'
           price='$15/mo'  
         />      
-      </PlanButtons>
+      </Buttons>
       <MonthlyYearlyButton/>
     </>
   );

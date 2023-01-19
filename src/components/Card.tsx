@@ -2,6 +2,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { formText } from "../lib/text";
 import { AddOns, PersonalInfo, Plan } from "../lib/types";
+import AddOnsForm from "./AddOnsForm";
 import BackForwardButtons from "./BackForwardButtons";
 import CardTitle from "./CardTitle";
 import Navbar from "./Navbar";
@@ -31,7 +32,7 @@ const Form = styled.section`
 
 
 export default function Card() {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(2);
 
   const [personalInfo, setPeronalInfo]: [
     PersonalInfo,
@@ -70,7 +71,10 @@ export default function Card() {
           />
           {currentStep === 0 
             ? <PlanForm/>
-            : <SelectPlanForm/>}
+            : currentStep === 1
+            ? <SelectPlanForm/>
+            : <AddOnsForm/>
+          }
           <BackForwardButtons/>
         </Form>
       </CardRight>

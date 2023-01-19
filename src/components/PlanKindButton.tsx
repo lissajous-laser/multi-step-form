@@ -27,14 +27,14 @@ const Icon = styled.img`
 const Text = styled.div`
 `
 
-const PlanNameText = styled.h2`
+const PlanName = styled.h2`
   color: ${theme.denim};
   font-weight: 500;
   font-size: 16px;
   line-height: 18px;
 `
 
-const PriceText = styled.p`
+const Price = styled.p`
   color: ${theme.gray};
   font-weight: 400;
   font-size: 14px;
@@ -53,10 +53,10 @@ export default function PlanKindButton({
 }) {
   return (
     <BigButton>
-      <Icon src={iconSrc}/>
+      <Icon src={iconSrc} alt='icon'/>
       <Text>
-        <PlanNameText>{planName}</PlanNameText>
-        <PriceText>{price}</PriceText>
+        <PlanName>{planName}</PlanName>
+        <Price>{price}</Price>
       </Text>
     </BigButton>
   );
