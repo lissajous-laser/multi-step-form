@@ -41,6 +41,10 @@ const Marker = styled.div`
   float: left;
 `
 
+/**
+ * Displays button to switch between montly and
+ * yearly subscription.
+ */
 export default function MonthlyYearlyButton() {
   return (
     <Container>

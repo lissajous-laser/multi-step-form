@@ -68,6 +68,9 @@ const Price = styled.p`
   color: ${theme.purple}
 `
 
+/**
+ * Displays an add-on option in AddOnsForm.
+ */
 export default function AddOnButton({
   addOnName,
   description,

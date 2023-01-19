@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { theme } from "../lib/theme";
 
-const Container = styled.div`
+const Container = styled.nav`
   width: 100%;
   display: flex;
   justify-content: space-between;

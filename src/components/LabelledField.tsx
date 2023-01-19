@@ -7,7 +7,6 @@ const Label = styled.label`
   font-size: 14px;
   line-height: 16px;
   color: ${theme.denim};
-  margin-top: 24px;
 `
 
 const Input = styled.input`
@@ -20,6 +19,9 @@ const Input = styled.input`
   padding-left: 16px;
 `
 
+/**
+ * Text input field for the PersonalInfoForm.
+ */
 export default function LabelledField({
   label,
   placeholder

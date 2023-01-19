@@ -1,6 +1,10 @@
 import styled from "styled-components";
 import { theme } from "../lib/theme";
 
+/**
+ * A button to select to the desired plan in
+ * SelectPlanForm.
+ */
 const BigButton = styled.button`
   width: 138px;
   height: 160px;

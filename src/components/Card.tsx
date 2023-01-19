@@ -5,7 +5,7 @@ import { AddOns, PersonalInfo, Plan } from "../lib/types";
 import AddOnsForm from "./AddOnsForm";
 import BackForwardButtons from "./BackForwardButtons";
 import CardTitle from "./CardTitle";
-import Navbar from "./Navbar";
+import Navbar from "./ProgressSidebar";
 import PlanForm from "./PersonalInfoForm";
 import SelectPlanForm from "./SelectPlanForm";
 
@@ -22,7 +22,7 @@ const CardRight = styled.div`
   flex-grow: 1;
 `
 
-const Form = styled.section`
+const Form = styled.div`
   width: 450px;
   height: 512px;
   margin: 56px auto 0;
@@ -32,7 +32,7 @@ const Form = styled.section`
 
 
 export default function Card() {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(0);
 
   const [personalInfo, setPeronalInfo]: [
     PersonalInfo,

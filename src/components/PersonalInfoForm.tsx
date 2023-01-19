@@ -3,6 +3,9 @@ import LabelledField from "./LabelledField";
 
 const Container = styled.div`
   margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 `
 
 
