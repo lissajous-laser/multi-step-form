@@ -5,9 +5,10 @@ import { AddOns, PersonalInfo, Plan } from "../lib/types";
 import AddOnsForm from "./AddOnsForm";
 import BackForwardButtons from "./BackForwardButtons";
 import CardTitle from "./CardTitle";
-import Navbar from "./ProgressSidebar";
+import ProgressSidebar from "./ProgressSidebar";
 import PlanForm from "./PersonalInfoForm";
 import SelectPlanForm from "./SelectPlanForm";
+import Summary from "./Summary";
 
 const Container = styled.div`
   background-color: white;
@@ -32,9 +33,9 @@ const Form = styled.div`
 
 
 export default function Card() {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
 
-  const [personalInfo, setPeronalInfo]: [
+  const [personalInfo, setPersonalInfo]: [
     PersonalInfo,
     Dispatch<SetStateAction<PersonalInfo>>
   ] = useState({
@@ -62,20 +63,25 @@ export default function Card() {
 
   return (
     <Container>
-      <Navbar/>
+      <ProgressSidebar {...{currentStep}}/>
       <CardRight>
         <Form>
           <CardTitle
-            title={formText[currentStep].title}
-            subtitle={formText[currentStep].subtitle}
+            title={formText[currentStep - 1] ? formText[currentStep - 1].title : ''}
+            subtitle={formText[currentStep - 1] ? formText[currentStep - 1].subtitle : ''}
           />
-          {currentStep === 0 
-            ? <PlanForm/>
-            : currentStep === 1
-            ? <SelectPlanForm/>
-            : <AddOnsForm/>
+          {currentStep === 1 
+            ? <PlanForm {...{personalInfo, setPersonalInfo}}/>
+            : currentStep === 2
+            ? <SelectPlanForm {...{plan, setPlan}} />
+            : currentStep === 3
+            ? <AddOnsForm
+                {...{addOns, setAddOns}}
+                duration={plan.duration}
+              />
+            : <Summary {...{plan, addOns}}/>
           }
-          <BackForwardButtons/>
+          <BackForwardButtons {...{currentStep, setCurrentStep}}/>
         </Form>
       </CardRight>
     </Container>

@@ -1,4 +1,7 @@
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
+import { prices } from "../lib/constants";
+import { AddOns } from "../lib/types";
 import AddOnButton from "./AddOnButton";
 
 const Buttons = styled.div`
@@ -8,23 +11,59 @@ const Buttons = styled.div`
   gap: 16px;
 `
 
-export default function AddOnsForm() {
+export default function AddOnsForm({
+  addOns,
+  duration,
+  setAddOns
+}: {
+  addOns: AddOns,
+  duration: 'monthly' | 'yearly'
+  setAddOns: Dispatch<SetStateAction<AddOns>>
+}) {
+
+
+
   return (
     <Buttons>
       <AddOnButton
         addOnName='Online service'
         description='Access to multiplayer games'
-        price='+1/mo'
+        price={
+          duration === 'monthly'
+          ? `+$${prices.onlineService}/mo`
+          : `+$${prices.onlineService * prices.yearlyMultiplier}/yr`
+        }
+        isActive={addOns.onlineService}
+        onClick={() => setAddOns((state) => ({
+          ...addOns,
+          onlineService: !state.onlineService
+        }))}
       />
       <AddOnButton
         addOnName='Larger storage'
         description='Extra 1TB of cloud save'
-        price='+2/mo'
+        price={duration === 'monthly'
+          ? `+$${prices.largerStorage}/mo`
+          : `+$${prices.largerStorage * prices.yearlyMultiplier}/yr`
+        }
+        isActive={addOns.largerStorage}
+        onClick={() => setAddOns((state) => ({
+          ...addOns,
+          largerStorage: !state.largerStorage
+        }))}
       />
       <AddOnButton
         addOnName='Customizable profile'
         description='Custom theme on your profile'
-        price='+2/mo'
+        price={duration === 'monthly'
+          ? `+$${prices.cusomizableProfile}/mo`
+          : `+$${prices.cusomizableProfile * prices.yearlyMultiplier}/yr`
+        }
+        isActive={addOns.customizableProfile}
+        onClick={() => setAddOns((state) => ({
+          ...addOns,
+          customizableProfile: !state.customizableProfile
+        }))}
       />
     </Buttons>
   );

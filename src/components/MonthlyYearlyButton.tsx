@@ -1,5 +1,7 @@
+import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 import styled from "styled-components";
 import { theme } from "../lib/theme";
+import {Plan} from '../lib/types';
 
 const Container = styled.button`
   width: 450px;
@@ -33,24 +35,35 @@ const Lozenge = styled.div`
   background-color: ${theme.denim};
 `
 
-const Marker = styled.div`
+const Marker = styled.div<{duration: 'monthly' | 'yearly'}>`
   width: 12px;
   height: 12px;
   border-radius: 6px;
   background-color: white;
-  float: left;
+  float: ${(props) =>
+    props.duration === 'monthly'
+    ? 'left'
+    : 'right'
+  };
 `
+
 
 /**
  * Displays button to switch between montly and
  * yearly subscription.
  */
-export default function MonthlyYearlyButton() {
+export default function MonthlyYearlyButton({
+  duration,
+  onClick
+}: {
+  duration: 'monthly' | 'yearly',
+  onClick: MouseEventHandler<HTMLButtonElement>
+}) {
   return (
-    <Container>
+    <Container {...{onClick}}>
       <ButtonLabel>Monthly</ButtonLabel>
       <Lozenge>
-        <Marker/>
+        <Marker {...{duration}}/>
       </Lozenge>
       <ButtonLabel>Yearly</ButtonLabel>
     </Container>

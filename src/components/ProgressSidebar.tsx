@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import bgImg from '../assets/images/bg-sidebar-desktop.svg';
-import favicon from '../assets/images/favicon-32x32.png';
 import Step from './Step';
 
 
@@ -22,14 +21,34 @@ const StepList = styled.div`
   gap: 32px;
 `
 
-export default function ProgressSidebar() {
+export default function ProgressSidebar({
+  currentStep
+}: {
+  currentStep: number
+}) {
   return (
     <Container>
       <StepList>
-        <Step index='1' name='YOUR INFO'/>
-        <Step index='2' name='SELECT PLAN'/>
-        <Step index='3' name='ADD-ONS'/>
-        <Step index='4' name='SUMMARY'/>
+        <Step
+          index='1'
+          name='YOUR INFO'
+          {...{currentStep}}
+        />
+        <Step
+          index='2'
+          name='SELECT PLAN'
+          {...{currentStep}}
+        />
+        <Step
+          index='3'
+          name='ADD-ONS'
+          {...{currentStep}}
+        />
+        <Step
+          index='4'
+          name='SUMMARY'
+          {...{currentStep}}
+        />
       </StepList>
     </Container>
   );

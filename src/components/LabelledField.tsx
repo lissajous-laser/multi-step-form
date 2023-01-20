@@ -1,3 +1,4 @@
+import { ChangeEventHandler } from "react";
 import styled from "styled-components";
 import { theme } from "../lib/theme";
 
@@ -24,15 +25,19 @@ const Input = styled.input`
  */
 export default function LabelledField({
   label,
-  placeholder
+  placeholder,
+  value,
+  onChange
 }: {
   label: string,
-  placeholder: string
+  placeholder: string,
+  value: string,
+  onChange: ChangeEventHandler<HTMLInputElement>
 }) {
   return (
     <Label>
       <p>{label}</p>
-      <Input placeholder={placeholder}/>
+      <Input {...{placeholder, onChange, value}}/>
     </Label>
   );
 }

@@ -4,6 +4,9 @@ import arcadeIcon from '../assets/images/icon-arcade.svg';
 import advancedIcon from '../assets/images/icon-advanced.svg';
 import proIcon from '../assets/images/icon-pro.svg';
 import MonthlyYearlyButton from "./MonthlyYearlyButton";
+import { Plan } from "../lib/types";
+import { Dispatch, SetStateAction } from "react";
+import { prices } from "../lib/constants";
 
 
 const Buttons = styled.div`
@@ -12,27 +15,59 @@ const Buttons = styled.div`
   margin-top: 40px;
 `
 
-export default function SelectPlanForm() {
+export default function SelectPlanForm({
+  plan,
+  setPlan
+}: {
+  plan: Plan,
+  setPlan: Dispatch<SetStateAction<Plan>>
+}) {
   return (
     <>
       <Buttons>
         <PlanKindButton
           iconSrc={arcadeIcon}
           planName='Arcade'
-          price='$9/mo'  
+          price={
+            plan.duration === 'monthly'
+            ? `$${prices.arcade}/mo`
+            : `$${prices.arcade * prices.yearlyMultiplier}/yr`
+          }
+          isSelected={plan.kind === 'arcade'}
+          duration={plan.duration}
+          onClick={() => setPlan((state) => ({...state, kind: 'arcade'}))}
         />
         <PlanKindButton
           iconSrc={advancedIcon}
           planName='Advanced'
-          price='$12/mo'  
+          price=
+            {plan.duration === 'monthly'
+            ? `$${prices.advanced}/mo`
+            : `$${prices.advanced * prices.yearlyMultiplier}/yr`
+          }
+          isSelected={plan.kind === 'advanced'}
+          duration={plan.duration}
+          onClick={() => setPlan((state) => ({...state, kind: 'advanced'}))}
         />
         <PlanKindButton
           iconSrc={proIcon}
           planName='Pro'
-          price='$15/mo'  
+          price={
+            plan.duration === 'monthly'
+            ? `$${prices.pro}/mo`
+            : `$${prices.pro * prices.yearlyMultiplier}/yr`}
+          isSelected={plan.kind === 'pro'}
+          duration={plan.duration}
+          onClick={() => setPlan((state) => ({...state, kind: 'pro'}))}
         />      
       </Buttons>
-      <MonthlyYearlyButton/>
+      <MonthlyYearlyButton
+        duration={plan.duration}
+        onClick={() => setPlan((state) => ({
+          ... state,
+          duration: state.duration === 'monthly' ? 'yearly' : 'monthly'
+        }))}
+      />
     </>
   );
 }

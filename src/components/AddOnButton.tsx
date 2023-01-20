@@ -1,30 +1,45 @@
 import styled from "styled-components";
 import { theme } from "../lib/theme";
 import tick from '../assets/images/icon-checkmark.svg';
+import { MouseEventHandler } from "react";
 
-const Container = styled.button`
+const Container = styled.button<{isActive: boolean}>`
   width: 450px;
   height: 81px;
   padding: 16px 24px;
-  background-color: white;
+  background-color: ${(props) => props.isActive ? theme.vLightGray : 'white'};
   border-radius: 8px;
-  border: 1px solid ${theme.borderColor};
+  border: 1px solid ${(props) =>
+    props.isActive
+    ? theme.purple
+    : theme.borderColor
+  };
   position: relative;
   font-family: Ubuntu;
 
   &:hover {
     cursor: pointer;
+    border-color: ${theme.purple}
   }
 `
 
-const TickBox = styled.div`
+const TickBox = styled.div<{isActive: boolean}>`
   position: absolute;
   left: 24px;
   top: 50%;
   width: 20px;
   height: 20px;
   border-radius: 4px;
-  background-color: ${theme.purple};
+  border: 1px solid ${(props) =>
+    props.isActive
+    ? theme.purple
+    : theme.lightGray
+  };
+  background-color: ${(props) =>
+    props.isActive
+    ? theme.purple
+    : 'white'
+  };
   transform: translateY(-50%);
   display: grid;
   place-items: center;
@@ -74,15 +89,19 @@ const Price = styled.p`
 export default function AddOnButton({
   addOnName,
   description,
-  price
+  price,
+  isActive,
+  onClick
 }: {
   addOnName: string,
   description: string,
-  price: string
+  price: string,
+  isActive: boolean,
+  onClick: MouseEventHandler<HTMLButtonElement>
 }) {
   return (
-    <Container>
-      <TickBox>
+    <Container {...{isActive, onClick}}>
+      <TickBox {...{isActive}}>
         <Tick src={tick} alt='tick mark'/>
       </TickBox>
       <MainText>

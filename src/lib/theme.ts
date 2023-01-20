@@ -10,5 +10,7 @@ export const theme = {
   purple: '#483EFF',
   red: '#EE374A',
   skyBlue: '#BEE2FD',
-  vLightGray: '#F8F9FF',  
+  vLightGray: '#F8F9FF',
+  hover_demin: '#164A8A',
+  hover_purple: '#928CFF'
 }

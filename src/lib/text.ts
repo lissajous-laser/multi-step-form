@@ -1,4 +1,4 @@
-export const formText = [
+export const formText: {title: string, subtitle: string}[] = [
   {
     title: 'Personal info',
     subtitle: 'Please provide your name, email address, and phone number.'
@@ -10,5 +10,9 @@ export const formText = [
   {
     title: 'Pick add-ons',
     subtitle: 'Add-ons help enhance your gaming experience.'
+  },
+  {
+    title: 'Finishing up',
+    subtitle: 'Double-check everything looks OK before confirming.'
   }
 ];

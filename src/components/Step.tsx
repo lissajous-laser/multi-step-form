@@ -6,14 +6,27 @@ const Container = styled.div`
   gap: 16px;
 `
 
-const CurrentStepIndicator = styled.div`
+const CurrentStepIndicator = styled.div<{isCurrent: boolean}>`
   width: 33px;
   height: 33px;
   display: grid;
   place-items: center;
-  border: 1px solid white;
+  border: 1px solid ${(props) =>
+    props.isCurrent
+    ? theme.skyBlue
+    : 'white'
+  };
   border-radius: 17px;
-  color: white;
+  color: ${(props) =>
+    props.isCurrent
+    ? theme.denim
+    : 'white'
+  };
+  background-color: ${(props) =>
+    props.isCurrent
+    ? theme.skyBlue
+    : 'transparent'
+  };
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;  
@@ -44,19 +57,24 @@ const Subtitle = styled.p`
  */
 export default function Step({
   index,
-  name
+  name,
+  currentStep
 }: {
   index: string,
-  name: string
+  name: string,
+  currentStep: number
 }) {
   return (
     <Container>
-      <CurrentStepIndicator>
+      <CurrentStepIndicator
+        isCurrent={index === String(currentStep)}
+      >
         {index}
       </CurrentStepIndicator>
       <Text>
         <Title>
           {`STEP ${index}`}
+          
         </Title>
         <Subtitle>
           {name}
