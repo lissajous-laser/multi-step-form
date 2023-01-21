@@ -3,7 +3,7 @@ import { theme } from "../lib/theme";
 
 const Container = styled.div`
   display: flex;
-  gap: 16px;
+  gap: min(9%, 16px);
 `
 
 const CurrentStepIndicator = styled.div<{isCurrent: boolean}>`

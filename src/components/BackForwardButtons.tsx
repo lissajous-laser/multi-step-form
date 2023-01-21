@@ -71,8 +71,6 @@ export default function BackForwardButtons({
   const forwardButtonClickHandler = () => {
     if (currentStep === 4) {
       submit();
-      setCurrentStep((state) => state + 1);
-      return;
     }
 
     if (currentStep !== 1) {
@@ -80,22 +78,34 @@ export default function BackForwardButtons({
       return;
     }
 
+    let newErrState = {name: true, email: true, phone: true};
+
     if (personalInfo.name.length === 0) {
-      setTextFieldErrors((state) => ({...state, name: true}));
+      newErrState.name = true;
+    } else {
+      newErrState.name = false;
     }
+
     if (personalInfo.email.length === 0) {
-      setTextFieldErrors((state) => ({...state, email: true}));
+      newErrState.email = true;
+    } else {
+      newErrState.email = false;
     }
+
     if (personalInfo.phone.length === 0) {
-      setTextFieldErrors((state) => ({...state, phone: true}));
+      newErrState.phone = true;
+    } else {
+      newErrState.phone = false;
     }
+
+    setTextFieldErrors(newErrState);
+
     if (personalInfo.name.length > 0
       && personalInfo.email.length > 0
       && personalInfo.phone.length > 0) {
 
-      setTextFieldErrors({name: false, email: false, phone: false})
       setCurrentStep((state) => state + 1);
-    }
+    }    
   }
 
   return (

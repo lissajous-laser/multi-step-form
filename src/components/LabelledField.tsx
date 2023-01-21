@@ -13,7 +13,7 @@ const Label = styled.label`
 
 const Input = styled.input<{error: boolean}>`
   display: block;
-  width: 450px;
+  width: min(100%, 450px);
   height: 48px;
   border-radius: 8px;
   border: 1px solid ${(props) => props.error ? theme.red : theme.borderColor};

@@ -10,10 +10,11 @@ import PlanForm from "./PersonalInfoForm";
 import SelectPlanForm from "./SelectPlanForm";
 import Summary from "./Summary";
 import { submitForms } from "../lib/functions";
+import Confirmation from "./Confirmation";
 
 const Container = styled.div`
   background-color: white;
-  width: 940px;
+  width: min(940px, 92%);
   height: 600px;
   border-radius: 15px;
   margin: 0 auto;
@@ -25,13 +26,11 @@ const CardRight = styled.div`
 `
 
 const Form = styled.div`
-  width: 450px;
+  width: min(83%, 450px);
   height: 512px;
   margin: 56px auto 0;
   position: relative;
 `
-
-
 
 export default function Card() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -86,17 +85,21 @@ export default function Card() {
                 {...{addOns, setAddOns}}
                 duration={plan.duration}
               />
-            : <Summary {...{plan, addOns}}/>
+            : currentStep === 4
+            ? <Summary {...{plan, addOns}}/>
+            : <Confirmation/>
           }
-          <BackForwardButtons 
-            {...{
-              currentStep,
-              setCurrentStep,
-              personalInfo,
-              setTextFieldErrors
-            }}
-            submit={() => submitForms(personalInfo, plan, addOns)}
-          />
+          {currentStep < 5 &&
+            <BackForwardButtons 
+              {...{
+                currentStep,
+                setCurrentStep,
+                personalInfo,
+                setTextFieldErrors
+              }}
+              submit={() => submitForms(personalInfo, plan, addOns)}
+            />
+          }
         </Form>
       </CardRight>
     </Container>

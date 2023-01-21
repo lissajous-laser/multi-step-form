@@ -8,7 +8,7 @@ import { Plan } from "../lib/types";
  * SelectPlanForm.
  */
 const BigButton = styled.button<{isSelected: boolean}>`
-  width: 138px;
+  width: min(30%, 138px);
   height: 160px;
   background-color: ${(props) =>
     props.isSelected

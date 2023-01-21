@@ -4,7 +4,7 @@ import { theme } from "../lib/theme";
 import {Plan} from '../lib/types';
 
 const Container = styled.button`
-  width: 450px;
+  width: min(100%, 450px);
   height: 48px;
   margin-top: 24px;
   background-color: ${theme.vLightGray};

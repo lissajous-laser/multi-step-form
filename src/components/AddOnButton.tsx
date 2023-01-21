@@ -4,7 +4,7 @@ import tick from '../assets/images/icon-checkmark.svg';
 import { MouseEventHandler } from "react";
 
 const Container = styled.button<{isActive: boolean}>`
-  width: 450px;
+  width: min(100%, 450px);
   height: 81px;
   padding: 16px 24px;
   background-color: ${(props) => props.isActive ? theme.vLightGray : 'white'};

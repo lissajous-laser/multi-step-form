@@ -6,7 +6,7 @@ import { AddOns, Plan } from "../lib/types";
 import SummaryAddOnItem from "./SummaryAddOnItem";
 
 const Container = styled.div`
-  width: 450px;
+  width: min(100%, 450px);
   margin-top: 40px;
 `
 
@@ -54,7 +54,7 @@ const PlanPrice = styled.p`
 `
 
 const Divider = styled.div`
-  width: 402px;
+  width: 100%;
   height: 1px;
   margin-top: 24px;
   background-color: ${theme.gray};

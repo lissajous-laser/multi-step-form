@@ -4,18 +4,21 @@ import Step from './Step';
 
 
 const Container = styled.div`
-  width: 274px;
+  width: clamp(183px, 27%, 274px);
   height: 568px;
-  background-image: url(${bgImg});
   margin-left: 16px;
   margin-top: 16px;
+  background-image: url(${bgImg});
+  background-position: center;
+  border-radius: 10px;
 `
 
 const StepList = styled.div`
   width: 153px;
   height: 228px;
   margin-top: 40px;
-  margin-left: 32px;
+  margin-left: clamp(20px, 10%, 32px);
+  margin-right: 10px;
   display: flex;
   flex-direction: column;
   gap: 32px;
