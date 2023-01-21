@@ -4,6 +4,6 @@ export const prices = {
   pro: 15,
   onlineService: 1,
   largerStorage: 2,
-  cusomizableProfile: 2,
+  customizableProfile: 2,
   yearlyMultiplier: 10
 }

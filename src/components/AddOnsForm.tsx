@@ -56,8 +56,8 @@ export default function AddOnsForm({
         addOnName='Customizable profile'
         description='Custom theme on your profile'
         price={duration === 'monthly'
-          ? `+$${prices.cusomizableProfile}/mo`
-          : `+$${prices.cusomizableProfile * prices.yearlyMultiplier}/yr`
+          ? `+$${prices.customizableProfile}/mo`
+          : `+$${prices.customizableProfile * prices.yearlyMultiplier}/yr`
         }
         isActive={addOns.customizableProfile}
         onClick={() => setAddOns((state) => ({

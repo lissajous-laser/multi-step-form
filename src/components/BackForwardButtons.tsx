@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 import styled from "styled-components";
 import { theme } from "../lib/theme";
+import { PersonalInfo } from "../lib/types";
 
 const Container = styled.nav`
   width: 100%;
@@ -49,14 +50,54 @@ const ForwardButton = styled.button<{isConfirm: boolean}>`
   }
 `
 
-
 export default function BackForwardButtons({
   currentStep,
-  setCurrentStep
+  setCurrentStep,
+  personalInfo,
+  setTextFieldErrors,
+  submit
 }: {
   currentStep: number,
-  setCurrentStep: Dispatch<SetStateAction<number>>
+  setCurrentStep: Dispatch<SetStateAction<number>>,
+  personalInfo: PersonalInfo,
+  setTextFieldErrors: Dispatch<SetStateAction<{
+    name: boolean,
+    email: boolean,
+    phone: boolean
+  }>>,
+  submit: () => void
 }) {
+
+  const forwardButtonClickHandler = () => {
+    if (currentStep === 4) {
+      submit();
+      setCurrentStep((state) => state + 1);
+      return;
+    }
+
+    if (currentStep !== 1) {
+      setCurrentStep((state) => state + 1);
+      return;
+    }
+
+    if (personalInfo.name.length === 0) {
+      setTextFieldErrors((state) => ({...state, name: true}));
+    }
+    if (personalInfo.email.length === 0) {
+      setTextFieldErrors((state) => ({...state, email: true}));
+    }
+    if (personalInfo.phone.length === 0) {
+      setTextFieldErrors((state) => ({...state, phone: true}));
+    }
+    if (personalInfo.name.length > 0
+      && personalInfo.email.length > 0
+      && personalInfo.phone.length > 0) {
+
+      setTextFieldErrors({name: false, email: false, phone: false})
+      setCurrentStep((state) => state + 1);
+    }
+  }
+
   return (
     <Container>
       {currentStep > 1 &&
@@ -67,7 +108,7 @@ export default function BackForwardButtons({
         </BackButton>
       }
       <ForwardButton
-        onClick={() => setCurrentStep((state) => state + 1)}
+        onClick={forwardButtonClickHandler}
         isConfirm={currentStep === 4}
       >
         {currentStep === 4 ? 'Confirm' : 'Next Step'}

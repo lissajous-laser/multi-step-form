@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
 import { PersonalInfo } from "../lib/types";
 import LabelledField from "./LabelledField";
@@ -13,11 +13,14 @@ const Container = styled.div`
 
 export default function PlanForm({
   personalInfo,
-  setPersonalInfo
+  setPersonalInfo,
+  textFieldErrors
 }: {
   personalInfo: PersonalInfo,
-  setPersonalInfo: Dispatch<SetStateAction<PersonalInfo>>
+  setPersonalInfo: Dispatch<SetStateAction<PersonalInfo>>,
+  textFieldErrors: {name: boolean, email: boolean, phone: boolean}
 }) {
+  
   return (
     <Container>
       <LabelledField
@@ -28,6 +31,7 @@ export default function PlanForm({
           ...state,
           name: event.target.value
         }))}
+        error={textFieldErrors.name}
       />
       <LabelledField
         label='Email Address'
@@ -37,6 +41,7 @@ export default function PlanForm({
           ...state,
           email: event.target.value
         }))}
+        error={textFieldErrors.email}
       />
       <LabelledField
         label='Phone Number'
@@ -46,6 +51,7 @@ export default function PlanForm({
           ...state,
           phone: event.target.value
         }))}
+        error={textFieldErrors.phone}
       />
     </Container>
   );

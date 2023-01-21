@@ -1,7 +1,9 @@
 import styled from "styled-components";
-import { capitalise } from "../lib/functions";
+import { prices } from "../lib/constants";
+import { camelCaseToSentence, capitalise, totalPrice, typedEntries } from "../lib/functions";
 import { theme } from "../lib/theme";
 import { AddOns, Plan } from "../lib/types";
+import SummaryAddOnItem from "./SummaryAddOnItem";
 
 const Container = styled.div`
   width: 450px;
@@ -59,6 +61,28 @@ const Divider = styled.div`
   opacity: 0.2;
 `
 
+const Total = styled.div`
+  margin-top: 25px;
+  margin-left: 24px;
+  margin-right: 24px;
+  display: flex;
+  justify-content: space-between;
+`
+
+const TotalHeader = styled.p`
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: ${theme.gray};
+`
+
+const TotalPrice = styled.p`
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  color: ${theme.purple}
+`
+
 export default function Summary({
   plan,
   addOns
@@ -77,11 +101,34 @@ export default function Summary({
           Change
         </SelectPlanButton>
         <PlanPrice>
-          $90/yr
+          {
+            plan.duration === 'monthly'
+            ? `+$${prices[plan.kind]}/mo`
+            : `+$${prices[plan.kind] * prices.yearlyMultiplier}/yr`
+          }
         </PlanPrice>
         <Divider/>
-        {Object.entries(addOns).filter((pair) => pair[1] === true)}
+        {typedEntries(addOns)
+          .filter((pair) => pair[1] === true)
+          .map((pair) => 
+            <SummaryAddOnItem
+              name={camelCaseToSentence(pair[0])}
+              price={
+                plan.duration === 'monthly'
+                ? `+$${prices[pair[0]]}/mo`
+                : `+$${prices[pair[0]] * prices.yearlyMultiplier}/yr`}
+            />
+          )
+        }
       </ItemisedList>
+      <Total>
+        <TotalHeader>
+          Total (per {plan.duration.slice(0, plan.duration.length - 2)})
+        </TotalHeader>
+        <TotalPrice>
+          ${totalPrice(plan, addOns)}/{plan.duration === 'monthly' ? 'mo' : 'yr'}
+        </TotalPrice>
+      </Total>
     </Container>
   );
 }

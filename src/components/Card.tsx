@@ -9,6 +9,7 @@ import ProgressSidebar from "./ProgressSidebar";
 import PlanForm from "./PersonalInfoForm";
 import SelectPlanForm from "./SelectPlanForm";
 import Summary from "./Summary";
+import { submitForms } from "../lib/functions";
 
 const Container = styled.div`
   background-color: white;
@@ -61,6 +62,12 @@ export default function Card() {
     customizableProfile: false
   } as AddOns);
 
+  const [textFieldErrors, setTextFieldErrors] = useState({
+    name: false,
+    email: false,
+    phone: false
+  });
+
   return (
     <Container>
       <ProgressSidebar {...{currentStep}}/>
@@ -71,7 +78,7 @@ export default function Card() {
             subtitle={formText[currentStep - 1] ? formText[currentStep - 1].subtitle : ''}
           />
           {currentStep === 1 
-            ? <PlanForm {...{personalInfo, setPersonalInfo}}/>
+            ? <PlanForm {...{personalInfo, setPersonalInfo, textFieldErrors}}/>
             : currentStep === 2
             ? <SelectPlanForm {...{plan, setPlan}} />
             : currentStep === 3
@@ -81,7 +88,15 @@ export default function Card() {
               />
             : <Summary {...{plan, addOns}}/>
           }
-          <BackForwardButtons {...{currentStep, setCurrentStep}}/>
+          <BackForwardButtons 
+            {...{
+              currentStep,
+              setCurrentStep,
+              personalInfo,
+              setTextFieldErrors
+            }}
+            submit={() => submitForms(personalInfo, plan, addOns)}
+          />
         </Form>
       </CardRight>
     </Container>
