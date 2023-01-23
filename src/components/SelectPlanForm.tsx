@@ -6,13 +6,19 @@ import proIcon from '../assets/images/icon-pro.svg';
 import MonthlyYearlyButton from "./MonthlyYearlyButton";
 import { Plan } from "../lib/types";
 import { Dispatch, SetStateAction } from "react";
-import { prices } from "../lib/constants";
+import { breakPt, prices } from "../lib/constants";
 
 
 const Buttons = styled.div`
   display: flex;
   gap: 18px;
   margin-top: 40px;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 22px;
+    flex-direction: column;
+    gap: 12px;
+  }
 `
 
 export default function SelectPlanForm({

@@ -1,5 +1,6 @@
 import { ChangeEventHandler } from "react";
 import styled from "styled-components";
+import { breakPt } from "../lib/constants";
 import { theme } from "../lib/theme";
 
 const Label = styled.label`
@@ -9,19 +10,39 @@ const Label = styled.label`
   line-height: 16px;
   color: ${theme.denim};
   position: relative;
+
+  @media screen and (${breakPt[720]}) {
+    font-size: 12px;
+    line-height: 14px;
+  }
 `
 
 const Input = styled.input<{error: boolean}>`
-  display: block;
   width: min(100%, 450px);
   height: 48px;
-  border-radius: 8px;
-  border: 1px solid ${(props) => props.error ? theme.red : theme.borderColor};
   margin-top: 8px;
   padding-left: 16px;
+  display: block;
+  border-radius: 8px;
+  border: 1px solid ${(props) => props.error ? theme.red : theme.borderColor};
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 18px;
+  color: ${theme.denim};
 
   &:hover {
     border-color: ${theme.purple};
+  }
+
+  ::placeholder {
+    color: ${theme.gray};
+  }
+
+
+  @media screen and (${breakPt[720]}) {
+    height: 40px;
+    margin-top: 3px;
+    border-radius: 4px;
   }
 `
 

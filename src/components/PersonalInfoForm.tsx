@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useState } from "react";
 import styled from "styled-components";
+import { breakPt } from "../lib/constants";
 import { PersonalInfo } from "../lib/types";
 import LabelledField from "./LabelledField";
 
@@ -8,6 +9,11 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 22px;
+    gap: 16px;
+  }  
 `
 
 

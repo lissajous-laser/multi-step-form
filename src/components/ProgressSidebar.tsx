@@ -1,16 +1,34 @@
 import styled from 'styled-components';
-import bgImg from '../assets/images/bg-sidebar-desktop.svg';
+import bgImgLg from '../assets/images/bg-sidebar-desktop.svg';
+import bgImgSm from '../assets/images/bg-sidebar-mobile.svg';
+import { breakPt } from '../lib/constants';
 import Step from './Step';
 
 
-const Container = styled.div`
+const Container = styled.div<{isMobileSize: boolean}>`
   width: clamp(183px, 27%, 274px);
   height: 568px;
   margin-left: 16px;
   margin-top: 16px;
-  background-image: url(${bgImg});
+  background-image: url(${bgImgLg});
   background-position: center;
   border-radius: 10px;
+  display: ${(props) => props.isMobileSize ? 'none' : 'block'};
+
+  @media screen and (${breakPt[720]}) {
+    width: 100%;
+    height: 172px;
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    background-image: url(${bgImgSm});
+    background-size: cover;
+    background-position: 50% 20%;
+    display: ${(props) => props.isMobileSize ? 'block' : 'none'};
+    z-index: 1;
+  }
 `
 
 const StepList = styled.div`
@@ -22,15 +40,25 @@ const StepList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
+
+  @media screen and (${breakPt[720]}) {
+    width: 180px;
+    height: 33px;
+    flex-direction: row;
+    gap: 16px;
+    margin: 32px auto 0;
+  }
 `
 
 export default function ProgressSidebar({
-  currentStep
+  currentStep,
+  isMobileSize
 }: {
-  currentStep: number
+  currentStep: number,
+  isMobileSize: boolean
 }) {
   return (
-    <Container>
+    <Container {...{isMobileSize}}>
       <StepList>
         <Step
           index='1'

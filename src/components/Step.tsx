@@ -1,9 +1,14 @@
 import styled from "styled-components";
+import { breakPt } from "../lib/constants";
 import { theme } from "../lib/theme";
 
 const Container = styled.div`
   display: flex;
   gap: min(9%, 16px);
+
+  @media screen and (${breakPt[720]}) {
+    display: block;
+  }
 `
 
 const CurrentStepIndicator = styled.div<{isCurrent: boolean}>`
@@ -32,15 +37,15 @@ const CurrentStepIndicator = styled.div<{isCurrent: boolean}>`
   line-height: 16px;  
 `
 
-const Text = styled.div`
-
-`
-
 const Title = styled.h2`
   color: ${theme.lightBlue};
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
+
+  @media screen and (${breakPt[720]}) {
+    display: none;
+  }
 `
 
 const Subtitle = styled.p`
@@ -49,6 +54,10 @@ const Subtitle = styled.p`
   font-weight: 700;
   font-size: 14px;
   line-height: 16px;
+
+  @media screen and (${breakPt[720]}) {
+    display: none;
+  }
 `
 
 /**
@@ -71,7 +80,7 @@ export default function Step({
       >
         {index}
       </CurrentStepIndicator>
-      <Text>
+      <div>
         <Title>
           {`STEP ${index}`}
           
@@ -79,7 +88,7 @@ export default function Step({
         <Subtitle>
           {name}
         </Subtitle>
-      </Text>
+      </div>
     </Container>
   );
 }

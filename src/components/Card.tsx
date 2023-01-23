@@ -11,6 +11,7 @@ import SelectPlanForm from "./SelectPlanForm";
 import Summary from "./Summary";
 import { submitForms } from "../lib/functions";
 import Confirmation from "./Confirmation";
+import { breakPt } from "../lib/constants";
 
 const Container = styled.div`
   background-color: white;
@@ -19,6 +20,14 @@ const Container = styled.div`
   border-radius: 15px;
   margin: 0 auto;
   display: flex;
+
+  @media screen and (${breakPt[720]}) {
+    width: min(442px, 92%);
+    display: block;
+    height: auto;
+    z-index: 2;
+    position: relative;
+  }
 `
 
 const CardRight = styled.div`
@@ -28,8 +37,17 @@ const CardRight = styled.div`
 const Form = styled.div`
   width: min(83%, 450px);
   height: 512px;
-  margin: 56px auto 0;
+  margin: auto;
+  padding-top: 56px;
   position: relative;
+  
+  @media screen and (${breakPt[720]}) {
+    width: min(calc(100% - 48px), 450px);
+    height: auto;
+    padding-top: 32px;
+    padding-bottom: 32px;
+
+  }  
 `
 
 export default function Card() {
@@ -42,7 +60,7 @@ export default function Card() {
     name: '',
     email: '',
     phone: ''
-  });  
+  });   
 
   const [plan, setPlan]: [
     Plan,
@@ -68,40 +86,64 @@ export default function Card() {
   });
 
   return (
-    <Container>
-      <ProgressSidebar {...{currentStep}}/>
-      <CardRight>
-        <Form>
-          <CardTitle
-            title={formText[currentStep - 1] ? formText[currentStep - 1].title : ''}
-            subtitle={formText[currentStep - 1] ? formText[currentStep - 1].subtitle : ''}
-          />
-          {currentStep === 1 
-            ? <PlanForm {...{personalInfo, setPersonalInfo, textFieldErrors}}/>
-            : currentStep === 2
-            ? <SelectPlanForm {...{plan, setPlan}} />
-            : currentStep === 3
-            ? <AddOnsForm
-                {...{addOns, setAddOns}}
-                duration={plan.duration}
-              />
-            : currentStep === 4
-            ? <Summary {...{plan, addOns}}/>
-            : <Confirmation/>
-          }
-          {currentStep < 5 &&
-            <BackForwardButtons 
-              {...{
-                currentStep,
-                setCurrentStep,
-                personalInfo,
-                setTextFieldErrors
-              }}
-              submit={() => submitForms(personalInfo, plan, addOns)}
+    <>
+      {/* Progress bar for widths < 720px */}
+      <ProgressSidebar
+        {...{currentStep}}
+        isMobileSize={true}
+      />
+      <Container>
+        {/* Progress bar for widths >= 720px */}
+        <ProgressSidebar
+          {...{currentStep}}
+          isMobileSize={false}
+        /> 
+        <CardRight>
+          <Form>
+            <CardTitle
+              title={formText[currentStep - 1] ? formText[currentStep - 1].title : ''}
+              subtitle={formText[currentStep - 1] ? formText[currentStep - 1].subtitle : ''}
             />
-          }
-        </Form>
-      </CardRight>
-    </Container>
+            {currentStep === 1 
+              ? <PlanForm {...{personalInfo, setPersonalInfo, textFieldErrors}}/>
+              : currentStep === 2
+              ? <SelectPlanForm {...{plan, setPlan}} />
+              : currentStep === 3
+              ? <AddOnsForm
+                  {...{addOns, setAddOns}}
+                  duration={plan.duration}
+                />
+              : currentStep === 4
+              ? <Summary {...{plan, addOns}}/>
+              : <Confirmation/>
+            }
+            {currentStep < 5 &&
+              <BackForwardButtons 
+                {...{
+                  currentStep,
+                  setCurrentStep,
+                  personalInfo,
+                  setTextFieldErrors
+                }}
+                submit={() => submitForms(personalInfo, plan, addOns)}
+                isMobileSize={false}
+              />
+            }
+          </Form>
+        </CardRight>
+      </Container>
+      {currentStep < 5 &&
+        <BackForwardButtons 
+          {...{
+            currentStep,
+            setCurrentStep,
+            personalInfo,
+            setTextFieldErrors
+          }}
+          submit={() => submitForms(personalInfo, plan, addOns)}
+          isMobileSize={true}
+        />
+      }
+    </>
   );
 }

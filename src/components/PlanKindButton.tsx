@@ -1,5 +1,6 @@
 import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 import styled from "styled-components";
+import { breakPt } from "../lib/constants";
 import { theme } from "../lib/theme";
 import { Plan } from "../lib/types";
 
@@ -31,6 +32,17 @@ const BigButton = styled.button<{isSelected: boolean}>`
     cursor: pointer;
     border-color: ${theme.purple}
   }
+
+  @media screen and (${breakPt[720]}) {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: start;
+    gap: 14px;
+    padding-top: 14px;
+    padding-bottom: 17px;
+  }
+
 `
 
 const Icon = styled.img`
@@ -39,6 +51,7 @@ const Icon = styled.img`
 `
 
 const Text = styled.div`
+
 `
 
 const PlanName = styled.h2`
@@ -54,6 +67,11 @@ const Price = styled.p`
   font-weight: 400;
   font-size: 14px;
   line-height: 16px;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 3px;
+    line-height: 20px;
+  }  
 `
 
 const Discount = styled.p`
@@ -62,6 +80,11 @@ const Discount = styled.p`
   font-weight: 400;
   font-size: 12px;
   line-height: 14px;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 3px;
+    line-height: 20px;
+  }
 `
 
 export default function PlanKindButton({

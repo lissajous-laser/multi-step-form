@@ -1,13 +1,31 @@
 import { Dispatch, MouseEventHandler, SetStateAction } from "react";
 import styled from "styled-components";
+import { breakPt } from "../lib/constants";
 import { theme } from "../lib/theme";
 import { PersonalInfo } from "../lib/types";
 
-const Container = styled.nav`
+const Container = styled.nav<{isMobileSize: boolean}>`
   width: 100%;
   position: absolute;
   bottom: 0;
+  display: ${(props) => props.isMobileSize ? 'none' : 'block'};
+
+  @media screen and (${breakPt[720]}) {
+    height: 72px;
+    margin: 0 auto;
+    padding-top: 16px;
+    background-color: white;
+    display: ${(props) => props.isMobileSize ? 'block' : 'none'};
+  }
 `
+
+const Cluster = styled.div`
+  @media screen and (${breakPt[720]}) {
+    width: min(442px, 92%);
+    margin: 0 auto;
+  }  
+`
+
 
 const BackButton = styled.button`
   background-color: white;
@@ -21,6 +39,12 @@ const BackButton = styled.button`
   &:hover {
     cursor: pointer;
     color: ${theme.denim}
+  }
+
+  @media screen and (${breakPt[720]}) {
+    background-color: white;
+    height: 40px;
+    font-size: 14px;
   }
 `;
 
@@ -48,6 +72,12 @@ const ForwardButton = styled.button<{isConfirm: boolean}>`
       : theme.hover_demin
     };
   }
+
+  @media screen and (${breakPt[720]}) {
+    width: 97px;
+    height: 40px;
+    font-size: 14px;
+  }
 `
 
 export default function BackForwardButtons({
@@ -55,7 +85,8 @@ export default function BackForwardButtons({
   setCurrentStep,
   personalInfo,
   setTextFieldErrors,
-  submit
+  submit,
+  isMobileSize
 }: {
   currentStep: number,
   setCurrentStep: Dispatch<SetStateAction<number>>,
@@ -65,7 +96,8 @@ export default function BackForwardButtons({
     email: boolean,
     phone: boolean
   }>>,
-  submit: () => void
+  submit: () => void,
+  isMobileSize: boolean
 }) {
 
   const forwardButtonClickHandler = () => {
@@ -109,20 +141,22 @@ export default function BackForwardButtons({
   }
 
   return (
-    <Container>
-      {currentStep > 1 &&
-        <BackButton
-          onClick={() => setCurrentStep((state) => state - 1)}
+    <Container {... {isMobileSize}}>
+      <Cluster>
+        {currentStep > 1 &&
+          <BackButton
+            onClick={() => setCurrentStep((state) => state - 1)}
+          >
+            Go Back
+          </BackButton>
+        }
+        <ForwardButton
+          onClick={forwardButtonClickHandler}
+          isConfirm={currentStep === 4}
         >
-          Go Back
-        </BackButton>
-      }
-      <ForwardButton
-        onClick={forwardButtonClickHandler}
-        isConfirm={currentStep === 4}
-      >
-        {currentStep === 4 ? 'Confirm' : 'Next Step'}
-      </ForwardButton>
+          {currentStep === 4 ? 'Confirm' : 'Next Step'}
+        </ForwardButton>
+      </Cluster>
     </Container>
   );
 }

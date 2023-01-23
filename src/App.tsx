@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-// import './App.css';
 import styled from 'styled-components';
 import Card from './components/Card';
 import { theme } from './lib/theme';
+import { breakPt } from './lib/constants';
 
 const Canvas = styled.main`
   width: 100%;
@@ -12,6 +11,12 @@ const Canvas = styled.main`
   display: grid;
   place-items: center;
   font-family: Ubuntu;
+
+  @media screen and (${breakPt[720]}) {
+    display: block;
+    position: relative;
+    padding-top: 100px;
+  }
 `
 
 

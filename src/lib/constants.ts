@@ -7,3 +7,7 @@ export const prices = {
   customizableProfile: 2,
   yearlyMultiplier: 10
 }
+
+export const breakPt = {
+  720: 'max-width: 720px'
+}
