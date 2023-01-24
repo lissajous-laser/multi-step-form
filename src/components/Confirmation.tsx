@@ -1,12 +1,18 @@
 import styled from "styled-components";
 import approved from '../assets/images/icon-thank-you.svg';
+import { breakPt } from "../lib/constants";
 import { theme } from "../lib/theme";
 
 const Container = styled.div`
-  width: 100%;
+  max-width: 450px;
   height: 238px;
-  margin-top: 181px;
+  margin-top: 125px;
   text-align: center;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 47px;
+    margin-bottom: 47px;
+  }  
 `
 
 const ApprovedImg = styled.img`
@@ -14,6 +20,11 @@ const ApprovedImg = styled.img`
   height: 80px;
   display: block;
   margin: 0 auto;
+
+  @media screen and (${breakPt[720]}) {
+    width: 56px;
+    height: 56px;
+  }
 `
 
 const Heading = styled.h1`
@@ -22,6 +33,12 @@ const Heading = styled.h1`
   font-size: 32px;
   line-height: 37px;
   color: ${theme.denim};
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 24px;
+    font-size: 24px;
+    line-height: 28px;
+  }
 `
 
 const TextBody = styled.p`
@@ -30,6 +47,10 @@ const TextBody = styled.p`
   font-size: 16px;
   line-height: 25px;
   color: ${theme.gray};
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 9px;
+  }
 `
 export default function Confirmation() {
   return (

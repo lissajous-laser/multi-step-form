@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { breakPt } from "../lib/constants";
 import { theme } from "../lib/theme";
 
 const Container = styled.div`
@@ -10,6 +11,10 @@ const Container = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 12px;
+  }
 `
 const NameText = styled.p`
   color: ${theme.gray};

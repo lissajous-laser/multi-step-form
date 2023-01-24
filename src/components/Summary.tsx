@@ -1,5 +1,6 @@
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { prices } from "../lib/constants";
+import { breakPt, prices } from "../lib/constants";
 import { camelCaseToSentence, capitalise, totalPrice, typedEntries } from "../lib/functions";
 import { theme } from "../lib/theme";
 import { AddOns, Plan } from "../lib/types";
@@ -8,6 +9,10 @@ import SummaryAddOnItem from "./SummaryAddOnItem";
 const Container = styled.div`
   width: min(100%, 450px);
   margin-top: 40px;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 22px;
+  }
 `
 
 const ItemisedList = styled.div`
@@ -15,6 +20,10 @@ const ItemisedList = styled.div`
   border-radius: 8px;
   background-color: ${theme.vLightGray};
   position: relative;
+
+  @media screen and (${breakPt[720]}) {
+    padding: 16px;
+  }
 `
 
 const PlanNameAndDuration = styled.h2`
@@ -22,6 +31,11 @@ const PlanNameAndDuration = styled.h2`
   font-size: 16px;
   line-height: 18px;
   color: ${theme.denim};
+
+  @media screen and (${breakPt[720]}) {
+    font-size: 14px;
+    line-height: 16px;
+  }  
 `
 
 const SelectPlanButton = styled.button`
@@ -41,6 +55,10 @@ const SelectPlanButton = styled.button`
     cursor: pointer;
     color: ${theme.purple};
   }
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 3px;
+  }  
 `
 
 const PlanPrice = styled.p`
@@ -51,6 +69,10 @@ const PlanPrice = styled.p`
   position: absolute;
   top: 31px;
   right: 24px;
+
+  @media screen and (${breakPt[720]}) {
+    font-size: 14px;
+  }   
 `
 
 const Divider = styled.div`
@@ -59,6 +81,10 @@ const Divider = styled.div`
   margin-top: 24px;
   background-color: ${theme.gray};
   opacity: 0.2;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 12px;
+  }
 `
 
 const Total = styled.div`
@@ -67,6 +93,12 @@ const Total = styled.div`
   margin-right: 24px;
   display: flex;
   justify-content: space-between;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 24px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
 `
 
 const TotalHeader = styled.p`
@@ -80,15 +112,21 @@ const TotalPrice = styled.p`
   font-weight: 700;
   font-size: 20px;
   line-height: 20px;
-  color: ${theme.purple}
+  color: ${theme.purple};
+
+  @media screen and (${breakPt[720]}) {
+    font-size: 16px;
+  }
 `
 
 export default function Summary({
   plan,
-  addOns
+  addOns,
+  setCurrentStep
 }: {
   plan: Plan,
-  addOns: AddOns
+  addOns: AddOns,
+  setCurrentStep: Dispatch<SetStateAction<number>>
 }) {
 
   return (
@@ -97,7 +135,7 @@ export default function Summary({
         <PlanNameAndDuration>
           {`${capitalise(plan.kind)} (${capitalise(plan.duration)})`}
         </PlanNameAndDuration>
-        <SelectPlanButton>
+        <SelectPlanButton onClick={() => setCurrentStep(2)}>
           Change
         </SelectPlanButton>
         <PlanPrice>

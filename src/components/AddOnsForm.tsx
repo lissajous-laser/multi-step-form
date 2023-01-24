@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
-import { prices } from "../lib/constants";
+import { breakPt, prices } from "../lib/constants";
 import { AddOns } from "../lib/types";
 import AddOnButton from "./AddOnButton";
 
@@ -9,6 +9,11 @@ const Buttons = styled.div`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 22px;
+    gap: 12px;
+  }
 `
 
 export default function AddOnsForm({

@@ -54,6 +54,11 @@ const ErrorMsg = styled.p`
   font-size: 14px;
   line-height: 16px;
   color: ${theme.red};
+
+  @media screen and (${breakPt[720]}) {
+    font-size: 12px;
+  line-height: 14px;
+  }
 `
 
 /**

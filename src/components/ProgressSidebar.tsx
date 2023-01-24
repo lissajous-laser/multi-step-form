@@ -6,7 +6,7 @@ import Step from './Step';
 
 
 const Container = styled.div<{isMobileSize: boolean}>`
-  width: clamp(183px, 27%, 274px);
+  width: clamp(183px, 30%, 274px);
   height: 568px;
   margin-left: 16px;
   margin-top: 16px;

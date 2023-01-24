@@ -6,8 +6,7 @@ import { breakPt } from './lib/constants';
 
 const Canvas = styled.main`
   width: 100%;
-  height: max(100vh);
-  background-color: ${theme.bg};
+  height: max(667px, 100vh);
   display: grid;
   place-items: center;
   font-family: Ubuntu;
@@ -19,13 +18,24 @@ const Canvas = styled.main`
   }
 `
 
+const Background = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: ${theme.bg};
+  z-index: -1;
+`
+
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <Canvas>
+      <Background/>
       <Card/>
+
     </Canvas>
   )
 }

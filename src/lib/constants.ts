@@ -9,5 +9,6 @@ export const prices = {
 }
 
 export const breakPt = {
-  720: 'max-width: 720px'
+  720: 'max-width: 720px',
+  h680: 'max-height: 680px'
 }

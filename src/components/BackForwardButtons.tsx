@@ -17,6 +17,10 @@ const Container = styled.nav<{isMobileSize: boolean}>`
     background-color: white;
     display: ${(props) => props.isMobileSize ? 'block' : 'none'};
   }
+
+  @media screen and (${breakPt[720]}) {
+    position: static;
+  }
 `
 
 const Cluster = styled.div`
@@ -110,32 +114,27 @@ export default function BackForwardButtons({
       return;
     }
 
-    let newErrState = {name: true, email: true, phone: true};
+    let newErrState = {name: false, email: false, phone: false};
+    let advancePage = true;
 
     if (personalInfo.name.length === 0) {
       newErrState.name = true;
-    } else {
-      newErrState.name = false;
+      advancePage = false;
     }
 
     if (personalInfo.email.length === 0) {
       newErrState.email = true;
-    } else {
-      newErrState.email = false;
+      advancePage = false;
     }
 
     if (personalInfo.phone.length === 0) {
       newErrState.phone = true;
-    } else {
-      newErrState.phone = false;
+      advancePage = false;
     }
 
     setTextFieldErrors(newErrState);
 
-    if (personalInfo.name.length > 0
-      && personalInfo.email.length > 0
-      && personalInfo.phone.length > 0) {
-
+    if (advancePage) {
       setCurrentStep((state) => state + 1);
     }    
   }

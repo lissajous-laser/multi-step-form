@@ -2,11 +2,11 @@ import styled from "styled-components";
 import { theme } from "../lib/theme";
 import tick from '../assets/images/icon-checkmark.svg';
 import { MouseEventHandler } from "react";
+import { breakPt } from "../lib/constants";
 
 const Container = styled.button<{isActive: boolean}>`
   width: min(100%, 450px);
   height: 81px;
-  padding: 16px 24px;
   background-color: ${(props) => props.isActive ? theme.vLightGray : 'white'};
   border-radius: 8px;
   border: 1px solid ${(props) =>
@@ -21,11 +21,15 @@ const Container = styled.button<{isActive: boolean}>`
     cursor: pointer;
     border-color: ${theme.purple}
   }
+
+  @media screen and (${breakPt[720]}) {
+    height: 62px;
+  }
 `
 
 const TickBox = styled.div<{isActive: boolean}>`
   position: absolute;
-  left: 24px;
+  left: 16px;
   top: 50%;
   width: 20px;
   height: 20px;
@@ -55,6 +59,11 @@ const MainText = styled.div`
   position: absolute;
   left: 68px;
   top: 16px;
+
+  @media screen and (${breakPt[720]}) {
+    top: 11px;
+    left: 52px;
+  }
 `
 
 const AddOnName = styled.h2`
@@ -62,6 +71,11 @@ const AddOnName = styled.h2`
   font-size: 16px;
   line-height: 18px;
   color: ${theme.denim};
+
+  @media screen and (${breakPt[720]}) {
+    font-size: 14px;
+    line-height: 16px;
+  }  
 `
 
 const Description = styled.p`
@@ -70,6 +84,11 @@ const Description = styled.p`
   font-size: 14px;
   line-height: 20px;
   color: ${theme.gray};
+
+  @media screen and (${breakPt[720]}) {
+    margin-top: 3px;
+    font-size: 12px;
+  }  
 `
 
 const Price = styled.p`
@@ -80,7 +99,12 @@ const Price = styled.p`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: ${theme.purple}
+  color: ${theme.purple};
+
+  @media screen and (${breakPt[720]}) {
+    right: 16px;
+    font-size: 12px;
+  }   
 `
 
 /**

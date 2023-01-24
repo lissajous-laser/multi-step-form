@@ -15,11 +15,11 @@ const Title = styled.h1`
 `
 
 const Subtitle = styled.p`
+  margin-top: 11px;
   font-weight: 400;
   font-size: 16px;
   line-height: 25px;
   color: ${theme.gray};
-  margin-top: 11px;
 
   @media screen and (${breakPt[720]}) {
     margin-top: 9px;
